@@ -21,13 +21,26 @@ export default {
   data() {
     return {
       imgUrls:[
-      'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
-      'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
-      'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
+      // 'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
+      // 'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
+      // 'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
       ],
       indicatorFlag: true
     }
-  }
+  },
+  created() {
+    let that = this
+    mpvue.request({
+      url:'https://zhengzhicheng.cn/api/public/v1/home/swiperdata',
+      success: function (res) {
+        let list = res.data.message
+        list= list.map (item => {
+          return item.image_src
+        })
+        that.imgUrls = list
+      }
+    })
+  },
 };
 </script>
 
