@@ -34,7 +34,7 @@ export default {
       indicatorFlag: true
     }
   },
-  created() {
+  async created() {
     let that = this
     // mpvue.request({
     //   url:'https://zhengzhicheng.cn/api/public/v1/home/swiperdata',
@@ -46,21 +46,30 @@ export default {
     //     that.imgUrls = list
     //   }
     // }),
-    request('https://zhengzhicheng.cn/api/public/v1/home/swiperdata')
-    .then(res => {
+    // request('https://zhengzhicheng.cn/api/public/v1/home/swiperdata')
+    // .then(res => {
+    //   let list = res.data.message
+    //    list= list.map (item => {
+    //       return item.image_src
+    //      })
+    //      that.imgUrls = list
+    // })
+    let res = await request('home/swiperdata')
       let list = res.data.message
        list= list.map (item => {
           return item.image_src
          })
          that.imgUrls = list
-    })
-    mpvue.request({
-      url: 'https://www.zhengzhicheng.cn/api/public/v1/home/catitems',
-      success: function (res) {
-        const {message} = res.data
-        that.menus = message
-      }
-    })
+
+    let menuRes= await request('home/catitems')
+     this.menus =menuRes.data.message
+    // mpvue.request({
+    //   url: 'https://www.zhengzhicheng.cn/api/public/v1/home/catitems',
+    //   success: function (res) {
+    //     const {message} = res.data
+    //     that.menus = message
+    //   }
+    // })
   },
 };
 </script>

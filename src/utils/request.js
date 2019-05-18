@@ -1,4 +1,5 @@
-const request = (url) => {
+const request = (path) => {
+  let url = 'https://www.zhengzhicheng.cn/api/public/v1/'+ path
   return new Promise(function(resolve,reject) {
     mpvue.request({
       url: url,
