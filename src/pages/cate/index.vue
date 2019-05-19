@@ -7,6 +7,7 @@
 
 <script>
 import SearchBar from '../../components/seach-bar'
+import request from '../../utils/request'
 export default {
   name: '',
   data () {
@@ -14,7 +15,16 @@ export default {
   },
   components: {
     'search-bar': SearchBar
-  }
+  },
+  created() {
+    this.queryData()
+  },
+  methods: {
+    async queryData () {
+      let res = await request('categories')
+      console.log(res)
+    }
+  },
 }
 </script>
 
