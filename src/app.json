@@ -3,7 +3,9 @@
     "pages/home/main",
     "pages/cate/main",
     "pages/card/main",
-    "pages/my/main" ],
+    "pages/my/main",
+    "pages/search/main"
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#EB4450",

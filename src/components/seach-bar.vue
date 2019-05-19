@@ -1,10 +1,12 @@
 <template>
   <div class="search">
+    <navigator url='/pages/search/main'>
       <div class="search-bar">
         <icon type="search"></icon>
         <span>搜索</span>
       </div>
-    </div>
+    </navigator>
+  </div>
 </template>
 
 <script>
