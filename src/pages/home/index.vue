@@ -1,11 +1,6 @@
 <template>
   <div>
-    <div class="search">
-      <div class="search-bar">
-        <icon type="search"></icon>
-        <span>搜索</span>
-      </div>
-    </div>
+    <search-bar></search-bar>
     <!-- 轮播图 -->
     <swiper :indicator-dots='indicatorFlag' indicator-color='rgba(255, 255, 255, .3)' circular='true'>
       <swiper-item v-for="(item, index) in imgUrls" :key='index'>
@@ -41,6 +36,7 @@
 </template>
 
 <script>
+import SearchBar from '../../components/seach-bar'
 import request from '../../utils/request'
 export default {
   name: "",
@@ -56,6 +52,9 @@ export default {
       indicatorFlag: true,
       ishow: false
     }
+  },
+  components: {
+    'search-bar': SearchBar
   },
   methods: {
     goTop () {
@@ -119,71 +118,6 @@ export default {
 };
 </script>
 
-<style>
-.search {
-  background-color: #eb4450;
-  padding: 10px;
-}
-.search .search-bar {
-  background-color: white;
-  text-align: center;
-}
-.search .search-bar icon {
-  vertical-align: middle;
-}
-.slide-image {
-  width: 750rpx
-}
-.menu {
-  display: flex;
-  justify-content: space-around
-}
-.menu .img1{
-  width: 128rpx;
-  height: 140rpx;
-}
-.floor {
-  margin-top: 20rpx
-}
-.floor .floor-title img {
-  width: 750rpx;
-  height: 80rpx;
-}
-.floor .floor-content {
-  display: flex
-}
-.floor .floor-content .left {
-  width: 240rpx
-}
-.floor .floor-content .left img{
-  width: 240rpx;
-  height: 380rpx;
-}
-.floor .floor-content .right {
-  flex: 1;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-.floor .floor-content .right img {
-  width: 232rpx;
-  height: 188rpx;
-  border-radius: 4px;
-}
-.to-top {
-  width:100rpx;
-  height:100rpx;
-  border-radius: 50%;
-  background:rgba(255,255,255,0.8);
-  position: fixed;
-  right:40rpx;
-  bottom:40rpx;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.to-top p {
-  font-size: 16px;
-}
+<style scoped lang='scss'>
+ @import 'main.scss';
 </style>
