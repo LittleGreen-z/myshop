@@ -2,6 +2,14 @@
     <div>
       <!-- 顶部搜索条 -->
       <search-bar></search-bar>
+      <div class="content">
+        <div class="left">
+          <div class="menu-item" :class="{active: menu.cat_id == currentId}" :key='menu.cat_id' v-for='menu in list'>
+            {{menu.cat_name}}
+          </div>
+        </div>
+        <div class="right"></div>
+      </div>
     </div>
 </template>
 
@@ -11,7 +19,10 @@ import request from '../../utils/request'
 export default {
   name: '',
   data () {
-    return {}
+    return {
+      list: [],
+      currentId: 1
+    }
   },
   components: {
     'search-bar': SearchBar
@@ -22,11 +33,12 @@ export default {
   methods: {
     async queryData () {
       let res = await request('categories')
-      console.log(res)
+      this.list = res.data.message
     }
   },
 }
 </script>
 
-<style>
+<style scoped lang='scss'>
+@import 'main.scss';
 </style>
