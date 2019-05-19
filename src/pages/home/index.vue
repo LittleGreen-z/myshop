@@ -63,10 +63,25 @@ export default {
         scrollTop: 0,
         duration: 300
       })
+    },
+    async initData () {
+      // 轮播图
+      let res = await request('home/swiperdata')
+      let list = res.data.message
+       list= list.map (item => {
+          return item.image_src
+         })
+         this.imgUrls = list
+        //  菜单接口调用
+        let menuRes= await request('home/catitems')
+        this.menus =menuRes.data.message
+        // 楼层
+        let floorRes = await request('home/floordata')
+        this.floors = floorRes.data.message
     }
   },
   async created() {
-    let that = this
+
     // mpvue.request({
     //   url:'https://zhengzhicheng.cn/api/public/v1/home/swiperdata',
     //   success: function (res) {
@@ -85,18 +100,7 @@ export default {
     //      })
     //      that.imgUrls = list
     // })
-    let res = await request('home/swiperdata')
-      let list = res.data.message
-       list= list.map (item => {
-          return item.image_src
-         })
-         that.imgUrls = list
 
-    let menuRes= await request('home/catitems')
-     this.menus =menuRes.data.message
-
-     let floorRes = await request('home/floordata')
-     this.floors = floorRes.data.message
     // mpvue.request({
     //   url: 'https://www.zhengzhicheng.cn/api/public/v1/home/catitems',
     //   success: function (res) {
@@ -104,9 +108,13 @@ export default {
     //     that.menus = message
     //   }
     // })
+    this.initData()
   },
   onPageScroll(event) {
     this.ishow = event.scrollTop>50
+  },
+  onPullDownRefresh () {
+    this.initData()
   }
 };
 </script>
