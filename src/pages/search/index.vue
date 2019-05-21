@@ -20,18 +20,38 @@ export default {
   data () {
     return {
       keyword: '',
-      kdList: []
+      kdList: [],
+      timer: '',
+      isLoading: false
     }
   },
   methods: {
     cancelSearch () {
       this.keyword= ''
     },
-    async keywordSearch () {
-      let ret = await request('goods/qsearch','get',{
-        query: this.keyword
-      })
-      this.kdList = ret.data.message
+    keywordSearch () {
+      // 函数防抖
+      // let that = this
+      // clearTimeout(that.timer)
+      // that.timer = setTimeout(async() => {
+      //   let ret = await request('goods/qsearch','get',{
+      //   query: that.keyword
+      //   })
+      //   that.kdList = ret.data.message
+      // }, 1000);
+      let that = this
+      if(this.isLoading) {
+        return
+      }
+      this.isLoading = true
+      setTimeout(async() => {
+        let ret = await request('goods/qsearch','get',{
+        query: that.keyword
+        })
+        that.kdList = ret.data.message
+        that.isLoading = false
+      }, 1000);
+
     }
   },
 }
